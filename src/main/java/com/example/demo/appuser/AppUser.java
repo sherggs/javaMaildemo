@@ -1,5 +1,6 @@
-package com.example.demo.appUser;
+package com.example.demo.appuser;
 
+import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,18 +17,48 @@ import java.util.Collections;
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
+@Entity
 
-public class appUser implements UserDetails {
+public class AppUser implements UserDetails {
+
+
+    @SequenceGenerator(
+            name = "student_sequence",
+            sequenceName = "student_sequence",
+            allocationSize = 1
+    )
+    @Id
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "student_sequence"
+    )
     private long id;
     private String name;
     private String username;
     private String email;
     private String password;
+    @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
     private boolean locked;
     private boolean enabled;
 
-
+    public AppUser(long id,
+                   String name,
+                   String username,
+                   String email,
+                   String password,
+                   AppUserRole appUserRole,
+                   boolean locked,
+                   boolean enabled) {
+        this.id = id;
+        this.name = name;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.appUserRole = appUserRole;
+        this.locked = locked;
+        this.enabled = enabled;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
