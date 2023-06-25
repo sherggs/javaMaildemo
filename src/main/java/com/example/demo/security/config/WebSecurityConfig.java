@@ -32,7 +32,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest() // any request
                 .authenticated().and() // must be authenticated
                 .formLogin(); // use form login
-
     }
 
     @Override
@@ -42,7 +41,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider(); // create provider
+        DaoAuthenticationProvider provider =
+                new DaoAuthenticationProvider(); // create provider
         provider.setPasswordEncoder(bCryptPasswordEncoder);  // set password encoder
         provider.setUserDetailsService(appUserService); // set user details service
         return provider;
