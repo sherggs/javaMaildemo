@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor // Lombok annotation
 
 public class ConfirmationToken {
     @SequenceGenerator(
@@ -25,13 +25,13 @@ public class ConfirmationToken {
     )
 
     private Long id;
+    @Column(nullable = false) // this is a constraint
+    private String token; // this is the token that we are going to send to the user
     @Column(nullable = false)
-    private String token;
+    private LocalDateTime createdAt; // this is the time when the token was created
     @Column(nullable = false)
-    private LocalDateTime createdAt;
-    @Column(nullable = false)
-    private LocalDateTime expiresAt;
-    private LocalDateTime confirmedAt;
+    private LocalDateTime expiresAt; // this is the time when the token will expire
+    private LocalDateTime confirmedAt; // this is the time when the token was confirmed
 
     @ManyToOne
     @JoinColumn(
@@ -42,8 +42,8 @@ public class ConfirmationToken {
 
 
     public ConfirmationToken(String token,
-                             LocalDateTime createdAt,
-                             LocalDateTime expiresAt,
+                             LocalDateTime createdAt, // this is the time when the token was created
+                             LocalDateTime expiresAt, //  this is the time when the token will expire
                              LocalDateTime confirmedAt,
                              AppUser appUser) {
         this.token = token;
