@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor // Lombok annotation
+@Entity
 
 public class ConfirmationToken {
     @SequenceGenerator(
