@@ -1,5 +1,5 @@
 package com.example.demo.email;
 
 public interface EmailSender {
-    void send(String to, String email);
+    static void send(String to, String email);
 }
