@@ -11,5 +11,11 @@ public class ConfirmationTokenService {
 
     public void saveConfirmationToken(ConfirmationToken token) {
         confirmationTokenRepository.save(token);
+
+
+    }
+
+    public void deleteConfirmationToken(Long id) {
+        confirmationTokenRepository.deleteById(id);
     }
 }
