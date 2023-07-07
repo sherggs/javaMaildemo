@@ -41,24 +41,24 @@ public class RegistrationService {
         String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
         EmailSender.send(
                 request.getEmail(),
-                buildEmail(request.getFirstName(), link));
+                buildEmail(request.getFirstName(), link)); // this is the method we created in EmailSender.java
         return token;
     }
     @Transactional
     public String confirmToken(String token) {
-        ConfirmationToken confirmationToken = confirmationTokenService
+        ConfirmationToken confirmationToken = confirmationTokenService // this is the method we created in ConfirmationTokenService.java
                 .getToken(token)
                 .orElseThrow(() ->
                         new IllegalStateException("token not found"));
 
         if(confirmationToken.getConfirmedAt() != null) {
-            throw new IllegalStateException("email already confirmed");
+            throw new IllegalStateException("email already confirmed"); // throw exception if email already confirmed
         }
 
-        LocalDateTime expiredAt = confirmationToken.getExpiresAt();
+        LocalDateTime expiredAt = confirmationToken.getExpiresAt(); // get expiration time of token
 
         if(expiredAt.isBefore(LocalDateTime.now())) {
-            throw new IllegalStateException("token expired");
+            throw new IllegalStateException("token expired");   // throw exception if token expired
         }
 
         confirmationTokenService.setConfirmedAt(token);
@@ -77,5 +77,5 @@ public class RegistrationService {
                 "    <p style=\"text-align: center; color: #5e9ca0; font-size: 18px;\">We look forward to seeing you soon!</p>\n" +
                 "    <p style=\"text-align: center; color: #5e9ca0; font-size: 18px;\">The Demo App Team</p>\n" +
                 "</div>";
-    }
+    } // this is the email that will be sent to the user
 }
