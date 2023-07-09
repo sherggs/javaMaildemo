@@ -11,8 +11,8 @@ import lombok.ToString;
 @ToString
 public class RegistrationRequest {
 
-    private final String firstName;
-    private final String lastName;
+    private final String firstName; // this is the same as the one in AppUser.java
+    private final String lastName; // this is the same as the one in AppUser.java
     private final String email;
     private final String password;
 
